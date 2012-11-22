@@ -1,0 +1,37 @@
+services:
+    event_flow_analyser.navbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { leftmenu: @event_flow_analyser.menu= }
+            # second argument: a named array of FormType Classes
+            - { } #searchform: Mopa\Bundle\BootstrapSandboxBundle\Form\Type\SearchFormType }
+            # third argument: a named array of options
+            - { title: "AWFM - UCS Event Flow Analyser", titleRoute: "default", fixedTop: true, isFluid: false }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: mopa_bootstrap.navbar, alias: frontendNavbar }
+
+    event_flow_analyser.navbarssubnavbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { menu: @event_flow_analyser.navbarsubnavmenu= }
+            - {}
+            # third argument: a named array of options
+            - { fixedTop: true, isFluid: true, template: MopaBootstrapBundle:Navbar:subnavbar.html.twig }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: mopa_bootstrap.navbar, alias: event_flow_analyserNavbarsSubNavbar }
+
+    event_flow_analyser.componentssubnavbar:
+        class: %mopa_bootstrap.navbar.generic%
+        arguments:
+            # first argument: a named array of menues:
+            - { menu: @event_flow_analyser.componentssubnavmenu= }
+            - {}
+            # third argument: a named array of options
+            - { fixedTop: true, isFluid: true, template: MopaBootstrapBundle:Navbar:subnavbar.html.twig }
+        tags:
+            # The alias is used to retrieve the navbar in templates
+            - { name: mopa_bootstrap.navbar, alias: event_flow_analyserComponentsSubNavbar }

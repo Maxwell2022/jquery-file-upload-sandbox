@@ -1,0 +1,8 @@
+{% extends 'JQueryFileUploadBundle::templates.html.twig' %}
+{% block js_blueimp_form %}
+    <!--  TODO: change path -->
+    <form id="fileupload" action="{{ path('default') }}" method="POST" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        {% include "JQueryFileUploadBundle::form.html.twig" %}
+    </form>
+{% endblock js_blueimp_form %}

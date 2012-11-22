@@ -1,0 +1,50 @@
+services:
+  event_flow_analyser.menu_builder:
+    class: Mylen\JQueryFileUploadSandbox\Menu\MenuBuilder
+    arguments:
+      - '@knp_menu.factory'
+      - "@logger"
+      - '@security.context'
+      - '%app.data_dir%'
+      - '@app.file'
+      - '@app.parser'
+      - '@app.event_flow'
+    tags:
+        - { name: monolog.logger, channel: app }
+
+  event_flow_analyser.menu:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory_service: event_flow_analyser.menu_builder
+    factory_method: createMainMenu
+    arguments: ["@request"]
+    scope: request # needed as we have the request as a dependency here
+    tags:
+      # The alias is what is used to retrieve the menu
+      - { name: knp_menu.menu, alias: main }
+
+  event_flow_analyser.navbarsubnavmenu:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory_service: event_flow_analyser.menu_builder
+    factory_method: createNavbarsSubnavMenu
+    arguments: ["@request"]
+    scope: request # needed as we have the request as a dependency here
+    tags:
+      # The alias is what is used to retrieve the menu
+      - { name: knp_menu.menu, alias: mainsubnav }
+
+  event_flow_analyser.componentssubnavmenu:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory_service: event_flow_analyser.menu_builder
+    factory_method: createComponentsSubnavMenu
+    arguments: ["@request"]
+    scope: request # needed as we have the request as a dependency here
+    tags:
+      # The alias is what is used to retrieve the menu
+      - { name: knp_menu.menu, alias: mainsubnav }
+
+  event_flow_analyser.menuvoter:
+    class: Mylen\JQueryFileUploadSandbox\Menu\Voter\RequestVoter
+    arguments:
+        - '@service_container'
+    tags:
+        - { name: knp_menu.voter }
