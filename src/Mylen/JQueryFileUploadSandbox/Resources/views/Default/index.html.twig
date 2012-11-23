@@ -4,5 +4,6 @@
     <form id="fileupload" action="{{ path('default') }}" method="POST" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         {% include "JQueryFileUploadBundle::form.html.twig" %}
+        <button type="submit" class="btn">Save</button>
     </form>
 {% endblock js_blueimp_form %}
